@@ -14,7 +14,7 @@ export class Category {
   }
 
   get description() {
-    return this.props.name;
+    return this.props.description;
   }
 
   get is_active() {
