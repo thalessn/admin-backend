@@ -7,7 +7,11 @@ export type CategoryProperties = {
 
 //Essa ideia de props, lembra bastante a props do React.
 export class Category {
-  constructor(public readonly props: CategoryProperties) {}
+  constructor(public readonly props: CategoryProperties) {
+    this.description = this.props.description;
+    this.props.is_active = this.props.is_active ?? true;
+    this.props.created_at = this.props.created_at ?? new Date();
+  }
 
   get name() {
     return this.props.name;
@@ -15,6 +19,10 @@ export class Category {
 
   get description() {
     return this.props.description;
+  }
+
+  private set description(value: string) {
+    this.props.description = value ?? null;
   }
 
   get is_active() {
