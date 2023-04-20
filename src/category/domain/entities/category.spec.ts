@@ -1,26 +1,9 @@
-import { Category } from "./category";
+import { Category, CategoryProperties } from "./category";
 import { omit } from "lodash";
+import { validate as uuidValidate } from "uuid";
 
 describe("Category Tests", () => {
   test("constructor of category", () => {
-    // // Triple AAA - arrange Act Assert
-
-    // //Arrage
-    // const props = {
-    //   name: "Movie",
-    //   description: "description",
-    //   is_active: true,
-    //   created_at: new Date(),
-    // };
-
-    // // Act
-    // const category = new Category(props);
-
-    // //Assert
-    // expect(category.name).toBe("Movie");
-    // expect(category.description).toBe("description");
-    // expect(category.is_active).toBeTruthy();
-    // expect(category.created_at).toBe(props.created_at);
     let category = new Category({ name: "Movie" });
     let props = omit(category.props, "created_at");
     expect(props).toStrictEqual({
@@ -69,6 +52,22 @@ describe("Category Tests", () => {
     expect(category.props).toMatchObject({
       name: "Movie",
       created_at,
+    });
+  });
+
+  test("id field", () => {
+    type CategoryData = { props: CategoryProperties; id?: string };
+    const data: CategoryData[] = [
+      { props: { name: "Movie" } },
+      { props: { name: "Movie" }, id: null },
+      { props: { name: "Movie" }, id: undefined },
+      { props: { name: "Movie" }, id: "0d379d08-996b-4ffa-a44e-eb7f1a6d623c" },
+    ];
+
+    data.forEach((i) => {
+      const category = new Category(i.props, i.id);
+      expect(category.id).not.toBeNull();
+      expect(uuidValidate(category.id)).toBeTruthy();
     });
   });
 });
