@@ -1,4 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
+import Entity from "../../../@seedwork/domain/entity/entity";
+import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
 
 export type CategoryProperties = {
   name: string;
@@ -7,12 +8,9 @@ export type CategoryProperties = {
   created_at?: Date;
 };
 
-//Essa ideia de props, lembra bastante a props do React.
-export class Category {
-  public readonly id: string;
-
-  constructor(public readonly props: CategoryProperties, id?: string) {
-    this.id = id || uuidv4();
+export class Category extends Entity<CategoryProperties> {
+  constructor(public readonly props: CategoryProperties, id?: UniqueEntityId) {
+    super(props, id);
     this.description = this.props.description;
     this.props.is_active = this.props.is_active ?? true;
     this.props.created_at = this.props.created_at ?? new Date();
@@ -36,5 +34,18 @@ export class Category {
 
   get created_at() {
     return this.props.created_at;
+  }
+
+  update(name: string, description: string) {
+    this.props.description = description;
+    this.props.name = name;
+  }
+
+  activate() {
+    this.props.is_active = true;
+  }
+
+  deactivate() {
+    this.props.is_active = false;
   }
 }

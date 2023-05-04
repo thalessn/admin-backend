@@ -1,6 +1,6 @@
+import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
 import { Category, CategoryProperties } from "./category";
 import { omit } from "lodash";
-import { validate as uuidValidate } from "uuid";
 
 describe("Category Tests", () => {
   test("constructor of category", () => {
@@ -56,18 +56,46 @@ describe("Category Tests", () => {
   });
 
   test("id field", () => {
-    type CategoryData = { props: CategoryProperties; id?: string };
+    type CategoryData = { props: CategoryProperties; id?: UniqueEntityId };
     const data: CategoryData[] = [
       { props: { name: "Movie" } },
       { props: { name: "Movie" }, id: null },
       { props: { name: "Movie" }, id: undefined },
-      { props: { name: "Movie" }, id: "0d379d08-996b-4ffa-a44e-eb7f1a6d623c" },
+      {
+        props: { name: "Movie" },
+        id: new UniqueEntityId("0d379d08-996b-4ffa-a44e-eb7f1a6d623c"),
+      },
     ];
 
     data.forEach((i) => {
       const category = new Category(i.props, i.id);
-      expect(category.id).not.toBeNull();
-      expect(uuidValidate(category.id)).toBeTruthy();
+      expect(category.uniqueEntityId).not.toBeNull();
+      expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId);
     });
+  });
+
+  it("should update description and name value", () => {
+    const category = new Category({
+      name: "Teste",
+      description: "Test_description",
+    });
+    expect(category.name).toBe("Teste");
+    expect(category.description).toBe("Test_description");
+
+    category.update("Updated_Name", "Updated_Description");
+    expect(category.name).toBe("Updated_Name");
+    expect(category.description).toBe("Updated_Description");
+  });
+
+  it("should activate and desativate the category", () => {
+    const category = new Category({
+      name: "Teste",
+      description: "Test_description",
+    });
+    expect(category.is_active).toBeTruthy();
+    category.deactivate();
+    expect(category.is_active).toBeFalsy();
+    category.activate();
+    expect(category.is_active).toBeTruthy();
   });
 });
