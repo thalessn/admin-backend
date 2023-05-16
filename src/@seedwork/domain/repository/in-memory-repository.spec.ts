@@ -1,6 +1,6 @@
 import Entity from "../entity/entity";
 import UniqueEntityId from "../value-objects/unique-entity-id.vo";
-import InMemoryRepository from "./in-memory-repository";
+import { InMemoryRepository } from "./in-memory-repository";
 
 type StubProps = {
   name: string;
@@ -19,7 +19,7 @@ describe("InmemoryRepository Unit Test", () => {
   it("should insert a new entity", async () => {
     const entity = new StubEntity({ name: "Teste", price: 10 });
     await repository.insert(entity);
-    expect(repository.items[0].toJSON()).toEqual(entity.toJSON);
+    expect(repository.items[0].toJSON()).toEqual(entity.toJSON());
   });
 
   it("should return a error if entity not found", async () => {
