@@ -23,7 +23,7 @@ export class SearchParams {
   protected _page: number;
   protected _per_page: number = 15;
   protected _sort: string | null;
-  protected _sort_dir: string | null;
+  protected _sort_dir: SortDirection | null;
   protected _filter: string | null;
 
   constructor(props: SearchProps = {}) {
@@ -67,7 +67,7 @@ export class SearchParams {
     this._per_page = _per_page;
   }
 
-  get sort() {
+  get sort(): string | null {
     return this._sort;
   }
 
@@ -76,7 +76,7 @@ export class SearchParams {
       value === null || value === undefined || value === "" ? null : `${value}`;
   }
 
-  get sort_dir() {
+  get sort_dir(): SortDirection | null {
     return this._sort_dir;
   }
 
@@ -89,7 +89,7 @@ export class SearchParams {
     this._sort_dir = dir !== "asc" && dir !== "desc" ? "asc" : dir;
   }
 
-  get filter() {
+  get filter(): string | null {
     return this._filter;
   }
 
@@ -150,5 +150,6 @@ export interface SearchableRepositoryInterface<
   SearchInput = SearchParams,
   SearchOutput = SearchResult<E, Filter>
 > extends RepositoryInterface<E> {
+  sortableFields: string[];
   search(props: SearchInput): Promise<SearchOutput>;
 }
