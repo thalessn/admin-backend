@@ -20,7 +20,7 @@ export default class ListCategoriesUseCase implements UseCase<Input, Output> {
     const items = searchResult.items.map((i) =>
       CategoryOutputMapper.toOutput(i)
     );
-    const pagination = PaginationOutputMapper.toPaginationOutput(searchResult);
+    const pagination = PaginationOutputMapper.toOutput(searchResult);
     return {
       items,
       ...pagination,
