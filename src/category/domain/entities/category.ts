@@ -37,7 +37,7 @@ export class Category extends Entity<CategoryProperties> {
   }
 
   update(name: string, description: string) {
-    this.props.description = description;
+    this.description = description;
     this.props.name = name;
   }
 
