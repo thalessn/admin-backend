@@ -2,7 +2,8 @@ FROM node:18.14.2-slim
 
 RUN apt update && apt install -y --no-install-recommends \
   git \
-  default-jre
+  default-jre \
+  procps
 
 RUN npm install -g @nestjs/cli@8.2.5
 
