@@ -226,7 +226,8 @@
   "devDependencies": {},
   "scripts": {
     "prestart:dev": "npm run build -w @tsn/micro-videos",
-    "start:dev": "npm run build:w -w @tsn/micro-videos & npm run start:dev -w nestjs"
+    "start:dev": "npm run build:w -w @tsn/micro-videos & npm run start:dev -w nestjs",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
