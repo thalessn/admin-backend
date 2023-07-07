@@ -16,12 +16,24 @@
   },
   "typesVersions": {
     ">=4.0": {
-      "@seedwork/domain": ["./dist/@seedwork/domain/index.d.js"],
-      "@seedwork/application": ["./dist/@seedwork/application/index.d.js"],
-      "@seedwork/infra": ["./dist/@seedwork/infra/index.d.js"],
-      "category/application": ["./dist/category/application/index.d.js"],
-      "category/domain": ["./dist/category/domain/index.d.js"],
-      "category/infra": ["./dist/category/infra/index.d.js"]
+      "@seedwork/domain": [
+        "./dist/@seedwork/domain/index.d.js"
+      ],
+      "@seedwork/application": [
+        "./dist/@seedwork/application/index.d.js"
+      ],
+      "@seedwork/infra": [
+        "./dist/@seedwork/infra/index.d.js"
+      ],
+      "category/application": [
+        "./dist/category/application/index.d.js"
+      ],
+      "category/domain": [
+        "./dist/category/domain/index.d.js"
+      ],
+      "category/infra": [
+        "./dist/category/infra/index.d.js"
+      ]
     }
   },
   "scripts": {
@@ -53,6 +65,9 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
+    "sequelize": "^6.32.1",
+    "sequelize-typescript": "^2.1.5",
+    "sqlite3": "^5.1.6",
     "uuid": "^9.0.0"
   }
 }
