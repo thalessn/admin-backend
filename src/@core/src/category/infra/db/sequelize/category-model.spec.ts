@@ -9,7 +9,7 @@ describe("CategoryModel Unit Tests", () => {
       (sequelize = new Sequelize({
         dialect: "sqlite",
         host: ":memory:",
-        logging: true,
+        logging: false,
         models: [CategoryModel],
       }))
   );
@@ -22,5 +22,14 @@ describe("CategoryModel Unit Tests", () => {
     await sequelize.close();
   });
 
-  it("teste", () => {});
+  it("create", async () => {
+    const arrange = {
+      id: "0d379d08-996b-4ffa-a44e-eb7f1a6d623c",
+      name: "test",
+      is_active: true,
+      created_at: new Date(),
+    };
+    const category = await CategoryModel.create(arrange);
+    expect(category.toJSON()).toStrictEqual(arrange);
+  });
 });
