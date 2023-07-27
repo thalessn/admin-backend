@@ -1,4 +1,4 @@
-import EntityNotFoundError from "../../errors/entity-not-found";
+import EntityNotFoundError from "../errors/entity-not-found";
 import Entity from "../entity/entity";
 import UniqueEntityId from "../value-objects/unique-entity-id.vo";
 import {

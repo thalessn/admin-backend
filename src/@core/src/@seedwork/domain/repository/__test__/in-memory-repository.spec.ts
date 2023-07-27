@@ -24,12 +24,13 @@ describe("InmemoryRepository Unit Test", () => {
 
   it("should return a error if entity not found", async () => {
     const id = "invalid Id";
-    expect(() => repository.findById(id)).rejects.toThrow();
+    await expect(() => repository.findById(id)).rejects.toThrow();
 
     const uniqueEntityId = new UniqueEntityId(
       "97576a70-ef53-4dc3-ae2e-1b25b26deb8f"
     );
-    expect(() => repository.findById(uniqueEntityId)).rejects.toThrow(
+
+    await expect(() => repository.findById(uniqueEntityId)).rejects.toThrow(
       "Entity not found with id: 97576a70-ef53-4dc3-ae2e-1b25b26deb8f"
     );
   });

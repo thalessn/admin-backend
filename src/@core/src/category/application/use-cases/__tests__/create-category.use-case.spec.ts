@@ -1,5 +1,5 @@
 import { Category } from "category/domain/entities/category";
-import CategoryInMemoryRepository from "../../../infra/repository/category-in-memory.repository";
+import CategoryInMemoryRepository from "../../../infra/db/in-memory/category-in-memory.repository";
 import CreateCategoryUseCase from "../create-category.use-case";
 
 describe("CreateCategoryUseCase Unit Test", () => {
