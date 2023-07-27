@@ -39,7 +39,7 @@ export class CategoryRules {
 
 export class CategoryValidator extends ClassValidatorField<CategoryRules> {
   validate(data: CategoryProperties): boolean {
-    return super.validate(new CategoryRules(data));
+    return super.validate(new CategoryRules(data ?? ({} as any)));
   }
 }
 
