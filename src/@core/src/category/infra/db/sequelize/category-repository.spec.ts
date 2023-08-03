@@ -78,4 +78,9 @@ describe("CategoryRepository Test", () => {
     expect(entities).toHaveLength(1);
     expect(JSON.stringify(entities)).toBe(JSON.stringify([entity]));
   });
+
+  it("search", async () => {
+    await CategoryModel.factory().create();
+    console.log(await CategoryModel.findAll());
+  });
 });
