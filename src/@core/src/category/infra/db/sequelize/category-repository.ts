@@ -20,7 +20,8 @@ export class CategorySequelizeRepository
     return CategoryModelMapper.toEntity(model);
   }
   async findAll(): Promise<Category[]> {
-    throw new Error("Method not implemented.");
+    const models = await this.categoryModel.findAll();
+    return models.map((m) => CategoryModelMapper.toEntity(m));
   }
   async update(entity: Category): Promise<void> {
     throw new Error("Method not implemented.");
