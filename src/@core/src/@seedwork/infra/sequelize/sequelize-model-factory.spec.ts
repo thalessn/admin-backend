@@ -28,7 +28,10 @@ class StubModel extends Model {
   }));
 
   static factory() {
-    return new SequelizeModelFactory(StubModel, StubModel.mockFactory);
+    return new SequelizeModelFactory<StubModel, { id: string; name: string }>(
+      StubModel,
+      StubModel.mockFactory
+    );
   }
 }
 
@@ -58,7 +61,7 @@ describe("SequelizeModelFactory Tests", () => {
   });
 
   test("make method", async () => {
-    let model = await StubModel.factory().make();
+    let model = StubModel.factory().make();
     expect(model.id).not.toBeNull();
     expect(uuidValidate(model.id));
     expect(model.name).not.toBeNull();
@@ -119,6 +122,44 @@ describe("SequelizeModelFactory Tests", () => {
     models = await StubModel.factory()
       .count(2)
       .bulkCreate(() => ({
+        id: chance.guid({ version: 4 }),
+        name: "test",
+      }));
+    expect(models[0].id).not.toBe(models[1].id);
+    expect(models[0].name).toBe("test");
+    expect(models[1].name).toBe("test");
+    expect(StubModel.mockFactory).toHaveBeenCalledTimes(2);
+  });
+
+  test("bulkMake method using count = 1", async () => {
+    let models = StubModel.factory().bulkMake();
+
+    expect(models).toHaveLength(1);
+    expect(models[0].id).not.toBeNull();
+    expect(models[0].name).not.toBeNull();
+    expect(StubModel.mockFactory).toHaveBeenCalledTimes(1);
+
+    models = await StubModel.factory().bulkCreate(() => ({
+      id: "0d379d08-996b-4ffa-a44e-eb7f1a6d623c",
+      name: "test",
+    }));
+    expect(models[0].id).toBe("0d379d08-996b-4ffa-a44e-eb7f1a6d623c");
+    expect(models[0].name).toBe("test");
+  });
+
+  test("bulkMake method using count > 1", async () => {
+    let models = StubModel.factory().count(2).bulkMake();
+
+    expect(models).toHaveLength(2);
+    expect(models[0].id).not.toBeNull();
+    expect(models[0].name).not.toBeNull();
+    expect(models[1].id).not.toBeNull();
+    expect(models[1].name).not.toBeNull();
+    expect(StubModel.mockFactory).toHaveBeenCalledTimes(2);
+
+    models = StubModel.factory()
+      .count(2)
+      .bulkMake(() => ({
         id: chance.guid({ version: 4 }),
         name: "test",
       }));
