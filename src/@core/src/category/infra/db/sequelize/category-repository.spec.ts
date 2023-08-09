@@ -6,6 +6,7 @@ import EntityNotFoundError from "#seedwork/domain/errors/entity-not-found";
 import { UniqueEntityId } from "#seedwork/domain";
 import { setupSequelize } from "../../../../@seedwork/infra/testing/helpers/db";
 import _chance from "chance";
+import { CategoryModelMapper } from "./category-mapper";
 
 describe("CategoryRepository Test", () => {
   setupSequelize({ models: [CategoryModel] });
@@ -84,10 +85,13 @@ describe("CategoryRepository Test", () => {
           created_at: created_at,
         }));
 
+      const spyToEntity = jest.spyOn(CategoryModelMapper, "toEntity");
       const searchOutput = await repository.search(
         new CategoryRepository.SearchParams()
       );
+
       expect(searchOutput).toBeInstanceOf(CategoryRepository.SearchResult);
+      expect(spyToEntity).toHaveBeenCalledTimes(15);
       expect(searchOutput.toJSON()).toMatchObject({
         total: 16,
         current_page: 1,
@@ -111,6 +115,27 @@ describe("CategoryRepository Test", () => {
           created_at: created_at,
         })
       );
+    });
+
+    it("should order by created_at DESC when search params are null", async () => {
+      const created_at = new Date();
+      await CategoryModel.factory()
+        .count(16)
+        .bulkCreate((index) => ({
+          id: chance.guid({ version: 4 }),
+          name: `Movie${index}`,
+          description: null,
+          is_active: true,
+          created_at: new Date(created_at.getTime() + 100 + index),
+        }));
+      const searchOutPut = await repository.search(
+        new CategoryRepository.SearchParams()
+      );
+
+      const items = searchOutPut.items;
+      [...items].reverse().forEach((item, index) => {
+        expect(`${item.name}${index + 1}`);
+      });
     });
   });
 });
