@@ -4,28 +4,14 @@ import { Category } from "#category/domain";
 import { CategorySequelizeRepository } from "./category-repository";
 import EntityNotFoundError from "#seedwork/domain/errors/entity-not-found";
 import { UniqueEntityId } from "#seedwork/domain";
+import { setupSequelize } from "../../../../@seedwork/infra/testing/helpers/db";
 
 describe("CategoryRepository Test", () => {
-  let sequelize: Sequelize;
+  setupSequelize({ models: [CategoryModel] });
   let repository: CategorySequelizeRepository;
-
-  beforeAll(
-    () =>
-      (sequelize = new Sequelize({
-        dialect: "sqlite",
-        host: ":memory:",
-        logging: false,
-        models: [CategoryModel],
-      }))
-  );
 
   beforeEach(async () => {
     repository = new CategorySequelizeRepository(CategoryModel);
-    await sequelize.sync({ force: true });
-  });
-
-  afterAll(async () => {
-    await sequelize.close();
   });
 
   it("should insert a new category", async () => {
