@@ -265,7 +265,7 @@ describe("InMemorySearchableRepository Unit Test", () => {
     }
   });
 
-  it("should search using fileter, sort and paginate", async () => {
+  it("should search using filter, sort and paginate", async () => {
     const items = [
       new StubEntity({ name: "test", price: 5 }),
       new StubEntity({ name: "a", price: 5 }),
