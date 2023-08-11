@@ -1,4 +1,3 @@
-import { Category } from "../../../../domain/entities/category";
 import GetCategoryUseCase from "../../get-category.use-case";
 import EntityNotFoundError from "../../../../../@seedwork/domain/errors/entity-not-found";
 import { CategorySequelize } from "#category/infra/db/sequelize/category-sequelize";
