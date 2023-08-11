@@ -67,6 +67,48 @@ describe("CategoryRepository Test", () => {
     expect(JSON.stringify(entities)).toBe(JSON.stringify([entity]));
   });
 
+  it("should throw error on update when a entity not found", async () => {
+    const entity = new Category({ name: "Movie" });
+    await expect(repository.update(entity)).rejects.toThrow(
+      new EntityNotFoundError(`Entity not found using ID ${entity.id}`)
+    );
+  });
+
+  it("should update a entity", async () => {
+    const entity = new Category({ name: "Movie" });
+    await repository.insert(entity);
+
+    entity.update("Movie Updated", entity.description);
+    await repository.update(entity);
+
+    let entityFound = await repository.findById(entity.id);
+    expect(entity.toJSON()).toStrictEqual(entityFound.toJSON());
+  });
+
+  it("should throw error on delete when a entity not found", async () => {
+    await expect(repository.delete("fake id")).rejects.toThrow(
+      new EntityNotFoundError("Entity not found using ID fake id")
+    );
+
+    await expect(
+      repository.delete("97576a70-ef53-4dc3-ae2e-1b25b26deb8f")
+    ).rejects.toThrow(
+      new EntityNotFoundError(
+        "Entity not found using ID 97576a70-ef53-4dc3-ae2e-1b25b26deb8f"
+      )
+    );
+  });
+
+  it("should delete a entity", async () => {
+    const entity = new Category({ name: "Movie" });
+    await repository.insert(entity);
+
+    await repository.delete(entity.id);
+    const entityFound = await CategoryModel.findByPk(entity.id);
+
+    expect(entityFound).toBeNull();
+  });
+
   describe("search method tests", () => {
     it("should only apply paginate when other params are null", async () => {
       const created_at = new Date();
