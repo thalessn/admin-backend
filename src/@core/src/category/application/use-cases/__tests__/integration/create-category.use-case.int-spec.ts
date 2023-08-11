@@ -2,7 +2,7 @@ import CreateCategoryUseCase from "../../create-category.use-case";
 import { CategorySequelize } from "#category/infra/db/sequelize/category-sequelize";
 import { setupSequelize } from "#seedwork/infra/testing/helpers/db";
 
-describe("CreateCategoryUseCase Unit Test", () => {
+describe("CreateCategoryUseCase Integration Test", () => {
   let categoryRepository: CategorySequelize.CategoryRepository;
   let createCategoryUseCase: CreateCategoryUseCase.UseCase;
 
