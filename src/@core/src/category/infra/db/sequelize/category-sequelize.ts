@@ -87,7 +87,9 @@ export namespace CategorySequelize {
       });
     }
     async delete(id: string): Promise<void> {
-      throw new Error("Method not implemented.");
+      const _id = `${id}`;
+      await this._get(_id);
+      this.categoryModel.destroy({ where: { id: _id } });
     }
     async search(
       props: CategoryRepositoryContract.SearchParams
