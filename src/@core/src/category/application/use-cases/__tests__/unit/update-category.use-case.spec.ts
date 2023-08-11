@@ -1,7 +1,7 @@
-import { Category } from "../../../domain/entities/category";
-import CategoryInMemoryRepository from "../../../infra/db/in-memory/category-in-memory.repository";
-import UpdateCategoryUseCase from "../update-category.use-case";
-import EntityNotFoundError from "../../../../@seedwork/domain/errors/entity-not-found";
+import { Category } from "../../../../domain/entities/category";
+import CategoryInMemoryRepository from "../../../../infra/db/in-memory/category-in-memory.repository";
+import UpdateCategoryUseCase from "../../update-category.use-case";
+import EntityNotFoundError from "../../../../../@seedwork/domain/errors/entity-not-found";
 
 describe("UpdateCategoryUseCase Unit Test", () => {
   let categoryRepository: CategoryInMemoryRepository;
