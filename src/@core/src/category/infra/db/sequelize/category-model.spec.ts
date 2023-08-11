@@ -1,6 +1,8 @@
-import { DataType, Sequelize } from "sequelize-typescript";
-import { CategoryModel } from "./category-model";
+import { DataType } from "sequelize-typescript";
+import { CategorySequelize } from "./category-sequelize";
 import { setupSequelize } from "../../../../@seedwork/infra/testing/helpers/db";
+
+const { CategoryModel } = CategorySequelize;
 
 describe("CategoryModel Unit Tests", () => {
   setupSequelize({ models: [CategoryModel] });
