@@ -15,7 +15,7 @@ describe("UpdateCategoryUseCase Unit Test", () => {
   });
 
   it("should throw an error when entity not found", async () => {
-    expect(() =>
+    await expect(() =>
       updateCategoryUseCase.execute({ id: "fake id", name: "fake" })
     ).rejects.toThrow(
       new EntityNotFoundError(`Entity not found with id: fake id`)

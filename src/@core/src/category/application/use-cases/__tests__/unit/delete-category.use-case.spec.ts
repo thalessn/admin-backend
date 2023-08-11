@@ -15,7 +15,7 @@ describe("DeleteCategoryUseCase Unit Test", () => {
   });
 
   it("should throw an error when entity not found", async () => {
-    expect(() =>
+    await expect(() =>
       deleteCategoryUseCase.execute({ id: "fake id" })
     ).rejects.toThrow(
       new EntityNotFoundError(`Entity not found with id: fake id`)
