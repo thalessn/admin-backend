@@ -5,7 +5,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { ConfigModule } from './config/config.module';
 
 @Module({
-  imports: [CategoriesModule, ConfigModule],
+  imports: [ConfigModule.forRoot(), CategoriesModule],
   controllers: [AppController],
   providers: [AppService],
 })
