@@ -1,7 +1,7 @@
 import {
   Category,
   CategoryRepository as CategoryRepositoryContract,
-} from "#category/domain";
+} from "../../../../category/domain";
 import { SequelizeModelFactory } from "#seedwork/infra/sequelize/sequelize-model-factory";
 import {
   Column,
@@ -16,7 +16,7 @@ import {
   EntityValidationError,
   LoadEntityError,
   EntityNotFoundError,
-} from "#seedwork/domain";
+} from "../../../../@seedwork/domain";
 import { Op } from "sequelize";
 
 export namespace CategorySequelize {
