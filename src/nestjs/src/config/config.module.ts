@@ -40,12 +40,13 @@ export const CONFIG_DB_SCHEMA: Joi.StrictSchemaMap<DB_SCHEMA_TYPE> = {
   DB_AUTO_LOAD_MODELS: Joi.boolean().required(),
 };
 
-export const CONFIG_SCHEMA_TYPE = CONFIG_DB_SCHEMA;
+export type CONFIG_SCHEMA_TYPE = DB_SCHEMA_TYPE;
 
 @Module({})
 export class ConfigModule extends NestConfigModule {
   static forRoot(options: ConfigModuleOptions = {}): DynamicModule {
     return super.forRoot({
+      isGlobal: true,
       envFilePath: [
         ...(Array.isArray(options.envFilePath)
           ? options.envFilePath
