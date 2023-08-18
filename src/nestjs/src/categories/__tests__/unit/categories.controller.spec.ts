@@ -1,12 +1,12 @@
-import { CategoriesController } from './categories.controller';
-import { CreateCategoryDto } from './dto/create-category.dto';
+import { CategoriesController } from '../../categories.controller';
+import { CreateCategoryDto } from '../../dto/create-category.dto';
 import {
   CreateCategoryUseCase,
   ListCategoriesUseCase,
   UpdateCategoryUseCase,
 } from '@tsn/micro-videos/category/application';
-import { UpdateCategoryDto } from './dto/update-category.dto';
-import { SearchCategoryDto } from './dto/search-category.dto';
+import { UpdateCategoryDto } from '../../dto/update-category.dto';
+import { SearchCategoryDto } from '../../dto/search-category.dto';
 
 describe('CategoriesController', () => {
   let controller: CategoriesController;

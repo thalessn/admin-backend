@@ -8,8 +8,8 @@ import {
   Delete,
   HttpCode,
   Query,
+  Inject,
 } from '@nestjs/common';
-import { Inject, Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import {
